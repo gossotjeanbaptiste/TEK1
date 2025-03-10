@@ -2,7 +2,7 @@
 
 ## Epitech
 
-Version Française
+### Version Française
 
 Dans ce répo github vous trouverez tous mes projets de Tek 1 à Epitech (hormis les projets demandant une Machine Virtuelle)
 
@@ -27,7 +27,9 @@ Dans ce répo github vous trouverez tous mes projets de Tek 1 à Epitech (hormis
 - [Semestre 2](Semester_2)
   - Arrive bientôt
 
-English Version
+---
+
+### English Version
 
 In this github repo you will find all my projects from Tek 1 at Epitech (except for projects requiring a Virtual Machine)
 
