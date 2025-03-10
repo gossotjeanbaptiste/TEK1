@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+
+from math import *
+from csv import *
+from sys import *
+
+COUNTRY_NAMES = {
+    "EUU": "European Union",
+    "USA": "United States",
+    # Ajoutez d'autres codes pays si nécessaire
+}
+
+def parse_data(file_path, country_code):
+    with open(file_path, mode='r') as file:
+        reader = DictReader(file, delimiter=',')
+        data = [row for row in reader if row['Country Code'] == country_code]
+        years = list(range(1960, 2018))
+        populations = [int(row[str(year)]) for year in years for row in data]
+    return {'Year': years, 'Population': populations}
+
+
+def normalize_data(data):
+    mean_year = sum(data['Year']) / len(data['Year'])
+    normalized_year = [x - mean_year for x in data['Year']]
+    normalized_population = [y / 1_000_000 for y in data['Population']]
+    return {
+        'Year': normalized_year,
+        'Population': normalized_population,
+        'mean_year': mean_year,
+        'scale_population': 1_000_000,
+    }
+
+
+def denormalize_population(population, scale_population):
+    return population * scale_population
+
+
+def linear_regression(data):
+    X = data['Year']
+    Y = data['Population']
+    N = len(X)
+
+    sum_X = sum(X)
+    sum_Y = sum(Y)
+    sum_X2 = sum(x**2 for x in X)
+    sum_XY = sum(x * y for x, y in zip(X, Y))
+
+    a = (N * sum_XY - sum_X * sum_Y) / (N * sum_X2 - sum_X**2)
+    b = (sum_Y - a * sum_X) / N
+
+    Y_pred = [a * x + b for x in X]
+    residuals = [y - y_pred for y, y_pred in zip(Y, Y_pred)]
+
+    rmsd = sqrt(sum(res**2 for res in residuals) / N)
+
+    total_variance = sum((y - sum_Y / N)**2 for y in Y)
+    explained_variance = sum((y_pred - sum_Y / N)**2 for y_pred in Y_pred)
+    correlation_coefficient = explained_variance / total_variance
+
+    return a, b, rmsd, correlation_coefficient, Y_pred
+
+
+def predict_population(a, b, year, mean_year):
+    return a * (year - mean_year) + b
+
+
+def print_style(country, a1, b1, rmsd1, pop_2050_1, a2, b2, rmsd2, pop_2050_2, correlation):
+    print(f"Country: {country}")
+    print("Fit1")
+    print(f"\tY = {a1:.2f} X + {b1:.2f}")
+    print(f"\tRoot-mean-square deviation: {rmsd1:.2f}")
+    print(f"\tPopulation in 2050: {pop_2050_1:.2f}")
+    print("Fit2")
+    print(f"\tX = {a2:.2f} Y + {b2:.2f}")
+    print(f"\tRoot-mean-square deviation: {rmsd2:.2f}")
+    print(f"\tPopulation in 2050: {pop_2050_2:.2f}")
+    print(f"Correlation: {correlation:.4f}")
+
+
+def usage():
+    print("USAGE")
+    print("\t./105demography [code]+")
+    print()
+    print("DESCRIPTION")
+    print("\tcode\tcountry code")
+
+
+def main(argc, argv):
+    if argc == 1:
+        exit(84)
+    elif argc == 2 and argv[1] == "-h":
+        usage()
+        return 0
+    else:
+        file_path = "105demography_data.csv"
+        country_code = argv[1]
+        country = COUNTRY_NAMES.get(country_code, country_code)
+
+        data = parse_data(file_path, country_code)
+        normalized_data = normalize_data(data)
+
+        # Fit1
+        a1, b1, rmsd1, correlation, Y_pred_normalized = linear_regression(
+            normalized_data)
+        pop_2050_1_normalized = predict_population(
+            a1, b1, 2050, normalized_data['mean_year'])
+        pop_2050_1 = (denormalize_population(
+            pop_2050_1_normalized, normalized_data['scale_population'])) / 1000000
+
+        # Fit2 (inverted data)
+        reversed_data = {
+            'Year': normalized_data['Population'], 'Population': normalized_data['Year']}
+        a2, b2, rmsd2, _, _ = linear_regression(reversed_data)
+        pop_2050_2_normalized = predict_population(
+            a2, b2, pop_2050_1_normalized, 0)
+        pop_2050_2 = pop_2050_2_normalized + normalized_data['mean_year']
+
+        # Print results
+        print_style(country, a1, b1, rmsd1, pop_2050_1,
+                    a2, b2, rmsd2, pop_2050_2, correlation)
+
+
+if __name__ == '__main__':
+    main(len(argv), argv)

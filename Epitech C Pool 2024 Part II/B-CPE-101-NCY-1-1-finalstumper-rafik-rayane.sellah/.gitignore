@@ -1,0 +1,15 @@
+*~
+*#
+unit_tests*
+libmy.a
+*.o
+*.out
+coding-style-reports.log
+settings.json
+tests/
+.vscode/
+include/
+./lib/my/build.sh
+bin/
+*.tgz
+rush1/

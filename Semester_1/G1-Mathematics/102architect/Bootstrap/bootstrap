@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+
+from math import *
+import sys
+
+# * --------
+# * - Ex 1 -
+# * --------
+
+
+def create_matrice(x, y):
+    return [x, y, 1]
+
+# * --------
+# * - Ex 2 -
+# * --------
+
+
+def matrix_translation(x, y):
+    return [[1, 0, x], [0, 1, y], [0, 0, 1]]
+
+# * --------
+# * - Ex 3 -
+# * --------
+
+
+def matrix_homothethie(x, y):
+    return [[x, 0, 0], [0, y, 0], [0, 0, 1]]
+
+# * --------
+# * - Ex 4 -
+# * --------
+
+
+def matrix_rotation(angle):
+    return [[cos(angle), -sin(angle), 0], [-sin(angle), cos(angle), 0], [0, 0, 1]]
+
+# * --------
+# * - Ex 5 -
+# * --------
+
+
+def matrix_symetric(angle):
+    return [[cos(2*angle), sin(2*angle), 0], [sin(2*angle), -cos(2*angle), 0], [0, 0, 1]]
+
+# * --------
+# * - Ex 6 -
+# * --------
+
+
+def matrix_multiplier_vector(matrix, vector):
+    if len(matrix[0]) != len(vector):
+        raise ValueError("Matrix columns must match vector length")
+    result = [0 for _ in range(len(matrix))]
+    for i in range(len(matrix)):
+        for j in range(len(vector)):
+            result[i] += matrix[i][j] * vector[j]
+    return result
+
+# * --------
+# * - Ex 7 -
+# * --------
+
+
+def matrix_multiplier(matrix1, matrix2):
+    result = create_matrix(len(matrix1), len(matrix2[0]))
+    for i in range(len(matrix1)):
+        for j in range(len(matrix2[0])):
+            for k in range(len(matrix2)):
+                result[i][j] += matrix1[i][k] * matrix2[k][j]
+    return result
+
+
+def create_matrix(rows, cols):
+    return [[0 for _ in range(cols)] for _ in range(rows)]
+
+
+matrix1 = [[3, 2, 1],
+           [2, 1, 3]]
+
+matrix2 = [[3, 5],
+           [6, 2],
+           [2, 2]]
+
+print(matrix_multiplier(matrix1, matrix2))
+
+matrix3 = [[3, 2, 1],
+           [2, 1, 3],
+           [3, 1, 4]]
+
+vector = [3, 6, 2]
+
+print(matrix_multiplier_vector(matrix3, vector))

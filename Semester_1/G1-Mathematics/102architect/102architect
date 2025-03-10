@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+
+from math import *
+from sys import *
+
+# TODO :
+# * Translation along vector (2, 3)
+# * Scaling by factors 1 and -2
+# * Rotation by a 45 degree angle
+# * Reflection over an axis with an inclination angle of 30 degrees
+# * 0.97 -0.52 0.38
+# * 0.26 1.93 6.31
+# * 0.00 0.00 1.00
+# * (1.00, 2.00) => (0.31, 10.44)
+
+
+# * --------
+# * - Ex 1 -
+# * --------
+
+
+def create_matrice(x, y):
+    return [x, y, 1]
+
+# * --------
+# * - Ex 2 -
+# * --------
+
+
+def matrix_translation(x, y):
+    return [[1, 0, x], [0, 1, y], [0, 0, 1]]
+
+# * --------
+# * - Ex 3 -
+# * --------
+
+
+def matrix_homothethie(x, y):
+    return [[x, 0, 0], [0, y, 0], [0, 0, 1]]
+
+# * --------
+# * - Ex 4 -
+# * --------
+
+
+def matrix_rotation(angle):
+    return [[cos(angle), -sin(angle), 0], [-sin(angle), cos(angle), 0], [0, 0, 1]]
+
+# * --------
+# * - Ex 5 -
+# * --------
+
+
+def matrix_symetric(angle):
+    return [[cos(2*angle), sin(2*angle), 0], [sin(2*angle), -cos(2*angle), 0], [0, 0, 1]]
+
+# * --------
+# * - Ex 6 -
+# * --------
+
+
+def matrix_multiplier_vector(matrix, vector):
+    if len(matrix[0]) != len(vector):
+        raise ValueError("Matrix columns must match vector length")
+    result = [0 for _ in range(len(matrix))]
+    for i in range(len(matrix)):
+        for j in range(len(vector)):
+            result[i] += matrix[i][j] * vector[j]
+    return result
+
+# * --------
+# * - Ex 7 -
+# * --------
+
+
+def matrix_multiplier(matrix1, matrix2):
+    result = create_matrix(len(matrix1), len(matrix2[0]))
+    for i in range(len(matrix1)):
+        for j in range(len(matrix2[0])):
+            for k in range(len(matrix2)):
+                result[i][j] += matrix1[i][k] * matrix2[k][j]
+    return result
+
+
+def create_matrix(rows, cols):
+    return [[0 for _ in range(cols)] for _ in range(rows)]
+
+
+def architect(ac, av):
+    x = float(av[1])
+    y = float(av[2])
+    matrix = matrix_translation(x, y)
+    i = 3
+    while i < ac:
+        if av[i] == "-t":
+            print(f"Translation along vector ({av[i + 1]}, {av[i + 2]})")
+            matrix = matrix_multiplier(
+                matrix, matrix_translation(float(av[i + 1]), float(av[i + 2])))
+            for j in range(len(matrix)):
+                if j != 0:
+                    print()
+                for k in range(len(matrix[j])):
+                    print(f"{matrix[j][k]:.2f}", end=" ")
+            print()
+            print(f"({x:.2f}, {y:.2f}) => ({
+                  matrix[0][2]:.2f}, {matrix[1][2]:.2f})")
+            i += 3
+        elif av[i] == "-z":
+            print(f"Scaling by factors {av[i + 1]} and {av[i + 2]}")
+            matrix = matrix_multiplier(
+                matrix, matrix_homothethie(float(av[i + 1]), float(av[i + 2])))
+            for j in range(len(matrix)):
+                if j != 0:
+                    print()
+                for k in range(len(matrix[j])):
+                    print(f"{matrix[j][k]:.2f}", end=" ")
+            print()
+            print(f"({x:.2f}, {y:.2f}) => ({
+                  x * float(argv[i + 1]):.2f}, {y * float(argv[i + 2]):.2f})")
+            i += 3
+        elif av[i] == "-r":
+            print(f"Rotation by a {argv[4]} degree angle")
+            matrix = matrix_multiplier(
+                matrix, matrix_rotation(radians(float(av[i + 1]))))
+            for j in range(len(matrix)):
+                if j != 0:
+                    print()
+                for k in range(len(matrix[j])):
+                    print(f"{matrix[j][k]:.2f}", end=" ")
+            print()
+            print(f"({x:.2f}, {y:.2f}) => ({y:.2f}, {x:.2f})")
+            i += 3
+        elif av[i] == "-s":
+            print(f"Reflection over an axis with an inclination angle of {
+                  argv[4]} degrees")
+            matrix = matrix_multiplier(
+                matrix, matrix_symetric(radians(float(av[i + 1]))))
+            for j in range(len(matrix)):
+                if j != 0:
+                    print()
+                for k in range(len(matrix[j])):
+                    print(f"{matrix[j][k]:.2f}", end=" ")
+            print()
+            print(f"({x:.2f}, {y:.2f}) => ({
+                  matrix[0][2]:.2f}, {matrix[1][2]:.2f})")
+            i += 3
+        else:
+            return 84
+    return 0
+
+
+def main(argc, argv):
+    if argc == 1:
+        return 84
+    if argv[1] == "-h" and argc < 5:
+        print(
+            "USAGE\n\t./102architect x y transfo1 arg11 [arg12] [transfo2 arg21 [arg22]] ...")
+        print("DESCRIPTION")
+        print("\tx\tabscissa of the original point")
+        print("\ty\tordinate of the original point")
+        print("\ttransfo arg1 [arg2]")
+        print("\t-t i j\ttranslation along vector (i, j)")
+        print("\t-z m n\tscaling by factors m (x-axis) and n (y-axis)")
+        print("\t-r d\trotation centered in O by a d degree angle")
+        print("\t-s d\treflection over the axis passing through O with an inclination angle of d degrees")
+        return 84
+    architect(argc, argv)
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main(len(argv), argv))

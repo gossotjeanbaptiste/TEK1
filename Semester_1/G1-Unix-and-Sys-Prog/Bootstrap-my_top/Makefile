@@ -1,0 +1,78 @@
+##
+## EPITECH PROJECT, 2024
+## Makefile
+## File description:
+## compiles libmy
+##
+
+LIB = libmy.a
+PROJECT_NAME = bs_mytop
+MY_LIB = -lmy -lncurses
+FLAGS = -Wall -Wextra -Wunused -Wimplicit
+
+all: libmy.a compile
+
+start :
+		mv gitignore.txt .gitignore
+
+libmy.a:
+		cd lib/my && make
+		make clean
+		echo "libmy.a has been compiled."
+
+compile:
+		gcc -o $(PROJECT_NAME) *.c src/*.c -I include/ -L ./ $(MY_LIB) $(FLAGS)
+clean:
+		cd lib/my && make clean
+		rm -f *.o
+
+fclean: clean
+		rm -f a.out
+		rm -f $(LIB)
+		rm -f $(PROJECT_NAME)
+		rm -f *~
+		rm -f lib/my/libmy.a
+		rm -f lib/my/*.o
+		rm -f lib/my/*~
+		rm -f coding-style-reports.log
+		rm -f *.gcno
+		rm -f *.gcda
+		rm -f unit_tests
+		rm -f *.out
+		echo "Everything has been cleaned, do make for have a \
+new libmy and compilation"
+
+re: fclean all
+
+cs: fclean
+		coding-style . .
+		cat coding-style-reports.log
+		rm -f coding-style-reports.log
+
+unit_tests: fclean
+		make all
+		gcc -o unit_tests tests/*.c -I include/ \
+			-L ./ -lmy -lcriterion --coverage
+
+
+tests_run:
+		./unit_tests
+		gcovr --exclude tests/
+		gcovr --exclude tests/ --branches
+		make fclean
+
+forbidden_function:
+		clear
+		grep -Rn system
+		grep -Rn exec
+		grep -Rn popen
+		grep -Rn getloadavg
+		grep -Rn getrusage
+		grep -Rn getrlimit
+		grep -Rn setutent
+
+segfault: all
+		gcc -o $(PROJECT_NAME) -g *.c src/*.c -I include/ -L ./ $(MY_LIB) \
+		$(FLAGS)
+
+.PHONY: cs all clean fclean re

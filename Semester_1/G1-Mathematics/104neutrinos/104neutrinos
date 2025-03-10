@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+
+from math import *
+import sys
+
+
+def compute_rms(sum_of_squares, n):
+    # RMS based on the sum of squares and the number of values
+    return sqrt(sum_of_squares / n)
+
+
+def update_arithmetics_mean(old_mean: float, new_value: float, n: int):
+    new_mean = (old_mean * n + new_value) / (n + 1)
+    return new_mean
+
+def update_harmonic_mean(current_harm_mean, new_value: float, n: int):
+    return (n + 1) / ((n / current_harm_mean) + (1 / new_value))
+
+
+def update_standard_dev(current_std_dev, new_value, old_arith_mean, n):
+    if n == 0:
+        return 0
+    new_mean = update_arithmetics_mean(old_arith_mean, new_value, n)
+    new_variance = ((n - 1) * (current_std_dev**2) +
+                    (new_value - new_mean) * (new_value - old_arith_mean)) / n
+    return sqrt(new_variance)
+
+
+def usage():
+    print("USAGE")
+    print("\t./104neutrinos n a h sd\n")
+    print("DESCRIPTION")
+    print("\tn\tnumber of values")
+    print("\ta\tarithmetic mean")
+    print("\th\tharmonic mean")
+    print("\tsd\tstandard deviation")
+    return
+
+
+def error_handle():
+    try:
+        n = int(sys.argv[1])
+        arith_mean = float(sys.argv[2])
+        harm_mean = float(sys.argv[3])
+        std_dev = float(sys.argv[4])
+    except ValueError:
+        print("Invalid input. Please enter a numeric value or 'END' to finish.")
+        exit(84)
+    if n < 1:
+        print("Invalid input. Please enter a numeric value or 'END' to finish.")
+        exit(84)
+    if arith_mean < 0 or harm_mean < 0 or std_dev < 0:
+        print("Invalid input. Please enter a numeric value or 'END' to finish.")
+        exit(84)
+    return 0
+
+
+def main():
+    if len(sys.argv) != 5 or error_handle() == 84:
+        usage()
+        exit(84)
+    if sys.argv[1] == "-h":
+        usage()
+        exit(0)
+
+    # Initial values
+    n = int(sys.argv[1])
+    arith_mean = float(sys.argv[2])
+    harm_mean = float(sys.argv[3])
+    std_dev = float(sys.argv[4])
+    sum_of_squares = n * (arith_mean**2 + std_dev**2)  # Initial sum of squares
+    sqrt_mean = compute_rms(sum_of_squares, n)
+
+    while True:
+        new_value_str = input("Enter next value: ")
+        if new_value_str == "END":
+            break
+        try:
+            new_value = float(new_value_str)
+            n += 1
+            sum_of_squares += new_value**2  # Update the sum of squares
+            sqrt_mean = compute_rms(sum_of_squares, n)  # Recompute RMS
+            old_arith_mean = arith_mean
+            arith_mean = update_arithmetics_mean(arith_mean, new_value, n)
+            harm_mean = update_harmonic_mean(harm_mean, new_value, n)
+            std_dev = update_standard_dev(
+                std_dev, new_value, old_arith_mean, n)
+
+            print(f"\tNumber of values: {n}")
+            print(f"\tStandard deviation: {std_dev:.2f}")
+            print(f"\tArithmetic mean: {arith_mean:.2f}")
+            print(f"\tRoot mean square: {sqrt_mean:.2f}")
+            print(f"\tHarmonic mean: {harm_mean:.2f}")
+            print()
+        except ValueError:
+            exit(84)
+
+
+if __name__ == "__main__":
+    main()

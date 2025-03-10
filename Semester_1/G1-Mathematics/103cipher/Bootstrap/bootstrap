@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+
+from math import *
+from sys import *
+
+
+def create_matrix(rows, cols):
+    return [[0 for _ in range(cols)] for _ in range(rows)]
+
+
+def smallest_matrix_square(str):
+    length = len(str)
+    size = ceil(sqrt(length))
+    return size
+
+
+def string_to_matrix(str):
+    size = smallest_matrix_square(str)
+    matrix = create_matrix(size, size)
+    for i in range(len(str)):
+        row = i // size
+        col = i % size
+        matrix[row][col] = ord(str[i])
+    return matrix
+
+
+def string_to_n_column_matrix(str, n):
+    size = ceil(len(str) / n)
+    matrix = create_matrix(size, n)
+    for i in range(len(str)):
+        row = i // n
+        col = i % n
+        matrix[row][col] = ord(str[i])
+    return matrix
+
+
+def matrix_multiplier(matrix1, matrix2):
+    result = create_matrix(len(matrix1), len(matrix2[0]))
+    for i in range(len(matrix1)):
+        for j in range(len(matrix2[0])):
+            for k in range(len(matrix2)):
+                result[i][j] += matrix1[i][k] * matrix2[k][j]
+    return result
+
+
+def matrix_transpose(matrix):
+    result = create_matrix(len(matrix[0]), len(matrix))
+    for i in range(len(matrix[0])):
+        for j in range(len(matrix)):
+            result[i][j] = matrix[j][i]
+    return result
+
+
+def matrix_determinant(matrix):
+    size = len(matrix)
+    if size != len(matrix[0]):
+        return 84
+    if size == 1:
+        return matrix[0][0]
+    if size == 2:
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    determinant = 0
+    for j in range(size):
+        minor = [[matrix[m][n]
+                  for n in range(size) if n != j] for m in range(1, size)]
+        cofactor = ((-1) ** j) * matrix[0][j] * matrix_determinant(minor)
+        determinant += cofactor
+    return determinant
+
+
+def matrix_cofactor(matrix, i, j):
+    if len(matrix) != 3 or len(matrix[0]) != 3:
+        return 84
+    minor = [[matrix[m][n]
+              for n in range(3) if n != j] for m in range(3) if m != i]
+    cofactor = ((-1) ** (i + j)) * \
+        (minor[0][0] * minor[1][1] - minor[0][1] * minor[1][0])
+    return cofactor
+
+
+def matrix_inverse(matrix):
+    size = len(matrix)
+    if size != len(matrix[0]):
+        return 84
+    determinant = matrix_determinant(matrix)
+    if determinant == 0:
+        return 84
+    cofactor_matrix = create_matrix(size, size)
+    for i in range(size):
+        for j in range(size):
+            minor = [[matrix[m][n] for n in range(
+                size) if n != j] for m in range(size) if m != i]
+            cofactor_matrix[i][j] = ((-1) ** (i + j)) * \
+                matrix_determinant(minor)
+    adjugate_matrix = matrix_transpose(cofactor_matrix)
+    inverse_matrix = [[adjugate_matrix[i][j] /
+                       determinant for j in range(size)] for i in range(size)]
+    return inverse_matrix

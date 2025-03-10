@@ -1,0 +1,11 @@
+File Edit Options Buffers Tools Help                                           .gitignore
+*~
+*#
+unit_tests*
+libmy.a
+*.o
+*.out
+coding-style-reports.log
+
+
+
