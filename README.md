@@ -25,13 +25,13 @@ Dans ce répo github vous trouverez tous mes projets de Tek 1 à Epitech (hormis
     - [104neutrinos](Semester_1/G1-Mathematics/104neutrinos)
     - [105demography](Semester_1/G1-Mathematics/105demography)
 - [Semestre 2](Semester_2)
-  - coming soon
+  - Arrive bientôt
 
 English Version
 
 In this github repo you will find all my projects from Tek 1 at Epitech (except for projects requiring a Virtual Machine)
 
-- [Semestre 1](Semester_1) :
+- [Semester 1](Semester_1) :
   - [G1 - C Graphical Programming](Semester_1/G1-C-Graphical-Prog)
     - [my_hunter](Semester_1/G1-C-Graphical-Prog/Project-my_hunter)
     - [my_radar](Semester_1/G1-C-Graphical-Prog/Project-my_radar)
@@ -49,5 +49,5 @@ In this github repo you will find all my projects from Tek 1 at Epitech (except 
     - [103cipher](Semester_1/G1-Mathematics/103cipher)
     - [104neutrinos](Semester_1/G1-Mathematics/104neutrinos)
     - [105demography](Semester_1/G1-Mathematics/105demography)
-- [Semestre 2](Semester_2)
+- [Semester 2](Semester_2)
   - coming soon
