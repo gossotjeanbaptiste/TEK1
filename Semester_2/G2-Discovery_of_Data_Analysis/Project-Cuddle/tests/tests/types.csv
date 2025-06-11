@@ -1,0 +1,4 @@
+string,int,uint,float,bool
+test,-10,10,10.5,true
+example,-5,20,15.0,false
+sample,0,30,25.0,true

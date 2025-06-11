@@ -1,0 +1,45 @@
+memo ex 1: 
+
+Heure de la prochaine reunion ?
+Quel projet ?
+Quel client ?
+C'est quoi "abstract VM" ?
+Plus de details sur les points à revoir.
+Quelles fonctionnalités ?
+Pression ? Date de la prochaine visite du client, où, comment ?
+Combien de temps ?
+Pour qui ? Par qui ?
+
+
+memo ex 2:
+
+Mise en page
+c'est quoi "abstract vm"
+c'est quoi la date de l'écheance
+signature et bonjour pas obligatoire
+pas d'indication explicite que c'est un memo
+Quand est ce que ça a été ecrit (Date à mettre dans le titre) ?
+
+Chaque Mémo à un numéro, la y en a pas.
+
+Memo Ex 3:
+
+Date, Destinataires, Par qui ?
+Rôles ?
+Objet ?
+
+Memo Ex 4: 
+
+Liste de contrôle :
+
+Objet/titre : Date projet, num memo, But du memo
+
+par qui, pour qui
+Etre concis, clair précis
+mise en page 
+	orthographe,
+	syntaxe,
+	cohérence,
+	structurée,
+	mise en évidence des éléments importants,
+	liste à puce

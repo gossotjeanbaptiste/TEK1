@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  poll:
+    build: ./poll
+    env_file:
+      - .env
+    ports:
+      - "5000:80"
+    networks:
+      - poll-tier
+    depends_on:
+      - redis
+    restart: always
+
+  redis:
+    image: redis:7.0.0  # Utilise l'image officielle Redis en version Alpine (plus légère)
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+    networks:
+      - poll-tier  # Connecte Redis au réseau "poll-tier"
+      - back-tier  # Connecte Redis au réseau "back-tier" pour communication avec worker
+    restart: always  # Redémarre automatiquement en cas de panne
+
+  worker:
+    build: ./worker
+    env_file:
+      - .env
+    networks:
+      - back-tier  # Connecte worker au réseau back-tier pour communiquer avec la BD et Redis
+    depends_on:
+      - redis  # Redis doit être disponible avant de lancer worker
+      - db  # La base de données doit être prête avant worker
+    restart: always  # Redémarrage automatique en cas de crash
+
+  db:
+    image: postgres:16
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - result-tier  # Connecte la base de données au réseau result-tier
+      - back-tier  # Connecte la base de données au réseau back-tier
+    restart: always  # Assure le redémarrage en cas d'erreur
+
+  result:
+    build: ./result
+    env_file:
+      - .env
+    ports:
+      - "5001:80"  # Redirige le port 5001 du host vers le port 80 du conteneur
+    networks:
+      - result-tier
+    depends_on:
+      - db
+    restart: always  # Redémarrage automatique
+
+networks:
+  poll-tier:  # Réseau pour poll et redis
+  result-tier:  # Réseau pour result et db
+  back-tier:  # Réseau pour worker, redis et db
+
+volumes:
+  db-data: 

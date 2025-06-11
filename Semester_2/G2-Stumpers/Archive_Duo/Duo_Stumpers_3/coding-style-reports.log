@@ -1,0 +1,10 @@
+./Makefile:30: MINOR:C-G7
+./include/graphic_art.h:26: MINOR:C-V3
+./src/handle_specifier.c:27: MINOR:C-G7
+./src/handle_specifier.c:30: MINOR:C-V3
+./src/handle_specifier.c:47: MINOR:C-V3
+./src/handle_specifier.c:54: MINOR:C-G7
+./src/handle_specifier.c:59: MINOR:C-G7
+./src/main.c:59: MINOR:C-G7
+./src/main.c:65: MINOR:C-G7
+./src/main.c:72: MINOR:C-V3

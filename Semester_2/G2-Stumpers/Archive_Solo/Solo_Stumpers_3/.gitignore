@@ -1,0 +1,6 @@
+fizzbuzz
+*.a
+*.o
+*~
+*#
+coding-style*

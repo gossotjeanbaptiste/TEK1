@@ -1,0 +1,26 @@
+{
+  "name": "b-web-200-ncy-2-1-epytodo-jean-baptiste.gossot",
+  "version": "1.0.0",
+  "description": "## Project Overview EPYTODO is a backend-focused project to build a Todo List application using **Node.js** and **MySQL**. The application allows users to manage their tasks efficiently. A frontend implementation can be added as a bonus.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpitechPGEPromo2029/B-WEB-200-NCY-2-1-epytodo-jean-baptiste.gossot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EpitechPGEPromo2029/B-WEB-200-NCY-2-1-epytodo-jean-baptiste.gossot/issues"
+  },
+  "homepage": "https://github.com/EpitechPGEPromo2029/B-WEB-200-NCY-2-1-epytodo-jean-baptiste.gossot#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1"
+  }
+}

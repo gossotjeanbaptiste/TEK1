@@ -1,0 +1,26 @@
+{
+  "name": "bootstrap-epytodo",
+  "version": "1.0.0",
+  "description": "bootstrap de epytodo",
+  "main": "index.js",
+  "scripts": {
+    "test": "ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpitechPGEPromo2029/B-WEB-200-NCY-2-1-bsepytodo-jean-baptiste.gossot.git"
+  },
+  "keywords": [
+    "web"
+  ],
+  "author": "GOSSOT Jean-Baptiste",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EpitechPGEPromo2029/B-WEB-200-NCY-2-1-bsepytodo-jean-baptiste.gossot/issues"
+  },
+  "homepage": "https://github.com/EpitechPGEPromo2029/B-WEB-200-NCY-2-1-bsepytodo-jean-baptiste.gossot#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}

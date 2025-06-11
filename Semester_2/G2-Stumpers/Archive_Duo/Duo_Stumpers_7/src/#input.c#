@@ -1,0 +1,77 @@
+/*
+11;rgb:ffff/ffff/dddd** EPITECH PROJECT, 2025
+** lingo
+** File description:
+** user input
+*/
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+static int right_len_motus(const char *word, const char *input,
+    char *blinded_word, int *tries)
+{
+    for (int i = 0; word[i]; i++) {
+        if (word[i] == input[i]) {
+            blinded_word[i] = word[i];
+        }
+    }
+    (*tries)++;
+    return 0;
+}
+
+static int motus(const char *word, const char *input, char *blinded_word, int *tries)
+{
+    int len_word = strlen(word);
+    int len_input = strlen(input) - 1;
+
+    if (len_word > len_input)
+        printf("Word too short. Retry.");
+    if (len_word < len_input)
+        printf("Word too long. Retry.");
+    if (len_word == len_input)
+        return right_len_motus(word, input, blinded_word, tries);
+    return 0;
+}
+
+int user_input(void)
+{
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t nread;
+    const char *word = "hi";
+    int lenw = strlen(word);
+    int tries = 1;
+    const int max_tries = lenw;
+    char blinded_word[lenw + 1];
+
+    printf("*: invalid letter\n");
+    printf("?: incorrectly placed letter\n");
+    printf("Will you find the secret word?\n");
+    for (int i = 0; i < lenw; i++) {
+        blinded_word[i] = '*';
+        i++;
+        blinded_word[i] = '\0';
+        i--;
+    }
+    blinded_word[0] = word[0];
+    printf("%s\n\nRound %d\n>", blinded_word, tries);
+    while (getline(&line, &len, stdin) != -1) {
+        printf("Round %d\n>", tries);
+        motus(word, line, blinded_word, &tries);
+        printf("%s\n", blinded_word);
+        if (strcmp(blinded_word, word) == 0) {
+            printf("\nYou won!\n");
+            break;
+        }
+        if (tries > max_tries) {
+            printf("\nYou lost!\n");
+            break;
+        }
+    }    return 0;
+}
+
+int main(void)
+{
+    return user_input();
+}

@@ -1,0 +1,6 @@
+anagram
+*.a
+*.o
+*~
+*#
+coding-style*

@@ -1,0 +1,13 @@
+{
+  "name": "hello-world",
+  "description": "Hello World",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.18.2"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  }
+}

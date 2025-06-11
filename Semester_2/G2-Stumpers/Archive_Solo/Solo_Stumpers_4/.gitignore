@@ -1,0 +1,6 @@
+frenchNameFormatter
+*.a
+*.o
+*~
+*#
+coding-style*
