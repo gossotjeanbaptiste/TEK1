@@ -29,6 +29,7 @@ int annexe_partition(var_sort_t *var_sort_t, char *arr, int i,
         }
     }
     free(cas);
+    return 0;
 }
 
 int partition(struct var_sort *var_sort_t,

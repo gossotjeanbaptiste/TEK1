@@ -13,7 +13,7 @@ SRC = $(wildcard *.c) $(wildcard src/*.c)
 INCL = -I include/
 LIB_COMP = -L ./ $(MY_LIB)
 
-all: libmy.a compile
+all: libmy.a $(PROJECT_NAME)
 
 start :
 		mv gitignore.txt .gitignore
@@ -24,7 +24,7 @@ libmy.a:
 		make clean
 		@echo "libmy.a has been compiled."
 
-compile:
+$(PROJECT_NAME):
 		gcc -o $(PROJECT_NAME) $(SRC) $(INCL) $(LIB_COMP) $(WFLAGS)
 clean:
 		cd lib/my && make clean

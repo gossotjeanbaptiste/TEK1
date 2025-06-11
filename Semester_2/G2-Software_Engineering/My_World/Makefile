@@ -16,7 +16,7 @@ INCL = -I include/
 SRC = $(wildcard *.c) $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 
-all: libmy.a compile
+all: libmy.a $(PROJECT_NAME)
 
 start :
 		mv gitignore.txt .gitignore
@@ -29,7 +29,7 @@ libmy.a:
 		cd lib/my_graphical && make
 		@echo "libmy.a and libmy_graphical.a has been compiled."
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 		gcc -o $(PROJECT_NAME) $(OBJ) \
 $(INCL) $(LIB_COMP) $(CSFML_LIB) \
 	$(CFLAGS)

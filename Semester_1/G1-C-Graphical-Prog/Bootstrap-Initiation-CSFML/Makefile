@@ -21,7 +21,7 @@ clean:
 		cd lib/my && make clean
 		rm -f *.o
 
-compile: 
+$(PROJECT_NAME): 
 		gcc main.c -l csfml-graphics csfml-audio
 
 fclean: clean

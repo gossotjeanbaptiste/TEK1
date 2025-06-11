@@ -27,7 +27,7 @@ libmy.a:
 		cp lib/my/my.h include/
 		@echo "libmy.a has been compiled."
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 		gcc -o $(PROJECT_NAME) $(OBJ) $(INCL) $(LIB_COMP) $(CFLAGS)
 
 clean:

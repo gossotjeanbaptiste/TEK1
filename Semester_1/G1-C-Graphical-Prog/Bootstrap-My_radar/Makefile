@@ -26,7 +26,7 @@ libmy.a:
 		echo "libmy.a and libmy_graphical.a has been compiled."
 		make compile
 
-compile:
+$(PROJECT_NAME):
 		gcc -o $(PROJECT_NAME) *.c src/*.c -I include/ -L ./ $(MY_LIB) \
 		$(CSFML_LIB) $(FLAGS)
 

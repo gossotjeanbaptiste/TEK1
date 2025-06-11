@@ -21,7 +21,7 @@ libmy.a:
 		echo "libmy.a and libmy_graphical.a has been compiled."
 		make compile
 
-compile:
+$(PROJECT_NAME):
 		gcc -o $(PROJECT_NAME) *.c -I include/ -L ./ -lmy -lmy_graphical \
 		-lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio \
 		-lcsfml-network

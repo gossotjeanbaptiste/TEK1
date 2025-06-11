@@ -30,7 +30,7 @@ libmy.a:
 		@echo "libmy.a and libmy_graphical.a has been compiled."
 		make compile
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 		gcc -o $(PROJECT_NAME) $(OBJ) $(INCL) $(LIB_COMP) $(CSFML_LIB) $(FLAGS)
 
 segfault : libmy.a

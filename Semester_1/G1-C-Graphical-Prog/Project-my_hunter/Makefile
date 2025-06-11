@@ -8,7 +8,7 @@
 LIB = libmy.a libmy_graphical.a
 PROJECT_NAME = my_hunter
 
-all: libmy.a compile
+all: libmy.a $(PROJECT_NAME)
 
 start :
 		mv gitignore.txt .gitignore
@@ -20,7 +20,7 @@ libmy.a:
 		make clean
 		echo "libmy.a and libmy_graphical.a has been compiled."
 
-compile:
+$(PROJECT_NAME):
 		gcc -o $(PROJECT_NAME) main.c src/*.c -I include/ \
 		-L ./ -lmy -lmy_graphical \
 		-lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio \

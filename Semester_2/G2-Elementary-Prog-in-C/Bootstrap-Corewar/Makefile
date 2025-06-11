@@ -24,7 +24,7 @@ libmy.a:
 		cd lib/my && make
 		@echo "libmy.a has been compiled."
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 		gcc -o $(PROJECT_NAME) $(OBJ) $(INCL) $(LIB_COMP) $(CFLAGS)
 
 clean:

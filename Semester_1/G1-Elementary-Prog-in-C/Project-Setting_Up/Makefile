@@ -14,7 +14,7 @@ OBJ = $(SRC:.c=.o)
 INCL = -I include/
 LIB_COMP = -L ./ $(MY_LIB)
 
-all: libmy.a compile
+all: libmy.a $(PROJECT_NAME)
 
 start :
 		mv gitignore.txt .gitignore
@@ -24,7 +24,7 @@ libmy.a:
 		cd lib/my && make
 		@echo "libmy.a has been compiled."
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 		gcc -o $(PROJECT_NAME) $(OBJ) $(INCL) $(LIB_COMP) $(FLAGS)
 
 clean:

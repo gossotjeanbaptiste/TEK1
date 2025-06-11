@@ -17,7 +17,7 @@ libmy.a:
 		make clean
 		echo "libmy.a has been compiled."
 
-compile: all
+$(PROJECT_NAME): all
 		gcc -o info_file info_file.c -I include/ -L ./ -lmy
 
 segfault: all

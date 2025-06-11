@@ -11,13 +11,13 @@ SRC = $(wildcard *.c) $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 INCL = -I include/
 
-all: compile
+all: $(PROJECT_NAME)
 
 start :
 		mv gitignore.txt .gitignore
 		mv src/project.c src/$(PROJECT_NAME).c
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 		gcc -o $(PROJECT_NAME) $(OBJ) $(INCL) $(FLAGS)
 
 clean:

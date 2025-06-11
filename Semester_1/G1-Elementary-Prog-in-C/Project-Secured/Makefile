@@ -5,26 +5,27 @@
 ## compiles libmy
 ##
 
-LIB = libmy.a
+LIBHASHTABLE = libhashtable.a
 PROJECT_NAME = secured
-MY_LIB = -lmy
+MY_LIB = -lhashtable
 CFLAGS = -Wall -Wextra -Wunused -Wimplicit -O3
 SRC = $(wildcard *.c) $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 INCL = -I include/
 LIB_COMP = -L ./ $(MY_LIB)
 
-all: libmy.a compile
+all: $(LIBHASHTABLE)
 
 start :
 		mv gitignore.txt .gitignore
 		mv src/project.c src/$(PROJECT_NAME).c
 
-libmy.a:
+# Correction: Supprimer la copie car lib/my fait déjà mv
+$(LIBHASHTABLE): $(wildcard lib/my/*.c) $(wildcard lib/my/*.h)
 		cd lib/my && make
-		@echo "libmy.a has been compiled."
+		@echo "libhashtable.a has been compiled."
 
-compile: $(OBJ)
+$(PROJECT_NAME): $(OBJ) $(LIBHASHTABLE)
 		gcc -o $(PROJECT_NAME) $(OBJ) $(INCL) $(LIB_COMP) $(CFLAGS)
 
 clean:

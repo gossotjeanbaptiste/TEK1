@@ -20,7 +20,7 @@ libmy.a:
 		make clean
 		echo "libmy.a has been compiled."
 
-compile:
+$(PROJECT_NAME):
 		gcc -o $(PROJECT_NAME) *.c src/*.c -I include/ -L ./ $(MY_LIB) $(FLAGS)
 clean:
 		cd lib/my && make clean
