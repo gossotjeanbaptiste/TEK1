@@ -31,7 +31,7 @@ Dans ce répo github vous trouverez tous mes projets de Tek 1 à Epitech (hormis
     - [Cuddle](Semester_2/G2-Discovery_of_Data_Analysis/Project-Cuddle)
   - [G2 - Elementary Programming in C](Semester_2/G2-Elementary-Prog-in-C)
     - [Robot Factory](Semester_2/G2-Elementary-Prog-in-C/Project-Robot_Factory)
-    - [A-maze-d](Semester_2/G2-Elementary-Prog-in-C/Project-A_maze_d)
+    - [A-maze-d](Semester_2/G2-Elementary-Prog-in-C/Project-Amazed)
     - [Corewar](Semester_2/G2-Elementary-Prog-in-C/Corewar)
   - [G2 - English](Semester_2/G2-English/Pitch_Video_Game)
   - [G2 - Intro to DevOps](Semester_2/G2-Intro_to_DevOps)
