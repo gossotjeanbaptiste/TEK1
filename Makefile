@@ -15,7 +15,6 @@ ORG = $(S1_CPE)/Project-Organized
 SEC = $(S1_CPE)/Project-Secured
 
 S1_PSU = $(S1)/G1-Unix-and-Sys-Prog
-MY_LS = $(S1_PSU)/Project-my_ls
 MY_TOP = $(S1_PSU)/Project-my_top
 MY_SUDO = $(S1_PSU)/Project-my_sudo
 
@@ -43,7 +42,6 @@ compile:
 		@cd $(BSQ) && make && echo "Compiled Setting_Up"
 		@cd $(ORG) && make && echo "Compiled Organized"
 		@cd $(SEC) && make && echo "Compiled libhashtable.a (Secured)"
-		@cd $(MY_LS) && make && echo "Compiled my_ls"
 		@cd $(MY_TOP) && make && echo "Compiled my_top"
 		@cd $(MY_SUDO) && make && echo "Compiled my_sudo"
 		@cd $(MY_HUNTER) && make && echo "Compiled my_hunter"
@@ -64,7 +62,6 @@ clean:
 		@cd $(BSQ) && make clean && echo "Cleaned Setting_Up"
 		@cd $(ORG) && make clean && echo "Cleaned Organized"
 		@cd $(SEC) && make clean && echo "Cleaned Secured"
-		@cd $(MY_LS) && make clean && echo "Cleaned my_ls"
 		@cd $(MY_TOP) && make clean && echo "Cleaned my_top"
 		@cd $(MY_SUDO) && make clean && echo "Cleaned my_sudo"
 		@cd $(MY_HUNTER) && make clean && echo "Cleaned my_hunter"
@@ -83,7 +80,6 @@ fclean: clean
 		@cd $(BSQ) && make fclean && echo "Cleaned Setting_Up"
 		@cd $(ORG) && make fclean && echo "Cleaned Organized"
 		@cd $(SEC) && make fclean && echo "Cleaned Secured"
-		@cd $(MY_LS) && make fclean && echo "Cleaned my_ls"
 		@cd $(MY_TOP) && make fclean && echo "Cleaned my_top"
 		@cd $(MY_SUDO) && make fclean && echo "Cleaned my_sudo"
 		@cd $(MY_HUNTER) && make fclean && echo "Cleaned my_hunter"
